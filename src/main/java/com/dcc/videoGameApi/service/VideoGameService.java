@@ -5,6 +5,7 @@ import com.dcc.videoGameApi.repository.VideoGameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -20,8 +21,11 @@ public class VideoGameService {
     }
 
     public List<VideoGame> GetAllGames(){
-        return videoGameRepository.findAll();
+        return videoGameRepository.findAll().stream().toList();
     }
 
+    public VideoGame GetGameById(@PathVariable int id){
+        return videoGameRepository.findAll().stream().filter(g -> g.getId() == id).findFirst().orElse(null);
+    }
 
 }
